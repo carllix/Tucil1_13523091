@@ -7,27 +7,23 @@ public class Main {
     public static void main(String[] args) {
         IO io = new IO();
         
-        String filePath = "2.txt";
+        String filePath = "6.txt";
 
         try {
             io.readInputFile(filePath);
 
             List<Block> blocks = io.getBlocks();
-            int rows = io.getRows();
-            int cols = io.getCols();
-
-            Board board = new Board(rows, cols, blocks);
-
+            Board board = io.getBoard();
             PuzzleSolver solver = new PuzzleSolver(board, blocks);
             solver.solvePuzzle();
 
             long duration = solver.getDuration();
             long totalCaseChecked = solver.getTotalCaseChecked();
 
-            String outputFilePath = "2.txt";
+            String outputFilePath = "6.txt";
             io.writeOutputFile(outputFilePath, solver.getBoard(), duration, totalCaseChecked);
 
-            String outputImageFilePath = "2.png";
+            String outputImageFilePath = "6.png";
             io.writeOutputImage(outputImageFilePath, solver.getBoard());
 
         } catch (IOException e) {

@@ -25,7 +25,7 @@ public class Board {
     private void initializeEmptyBoard() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                board[i][j] = '.';
+                board[i][j] = '%';
             }
         }
     }
@@ -46,6 +46,10 @@ public class Board {
         return COLORS;
     }
 
+    public void setBoard (int x, int y, char c) {
+        this.board[x][y] = c;
+    }
+
     public void printBoard() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -54,6 +58,8 @@ public class Board {
                 if (cell >= 'A' && cell <= 'Z') {
                     int colorIdx = cell - 'A';
                     System.out.print(COLORS[colorIdx] + cell + RESET + " ");
+                } else if (cell == '.') {
+                    System.out.print("\u001B[30m" + cell + RESET + " ");
                 } else {
                     System.out.print(cell + " ");
                 }
@@ -70,8 +76,8 @@ public class Board {
         for (int i = 0; i < block.getHeight(); i++) {
             for (int j = 0; j < block.getWidth(); j++) {
                 char[][] cells = block.getCells();
-                if (cells[i][j] != '.') {
-                    if (isOutOfBounds(x + i, y + j) || board[x + i][y + j] != '.') {
+                if (cells[i][j] != '%') {
+                    if (isOutOfBounds(x + i, y + j) || board[x + i][y + j] != '%') {
                         return false;
                     }
                 }
@@ -84,7 +90,7 @@ public class Board {
         for (int i = 0; i < block.getHeight(); i++) {
             for (int j = 0; j < block.getWidth(); j++) {
                 char[][] cells = block.getCells();
-                if (cells[i][j] != '.') {
+                if (cells[i][j] != '%') {
                     board[x + i][y + j] = cells[i][j];
                 }
             }
@@ -95,8 +101,8 @@ public class Board {
         for (int i = 0; i < block.getHeight(); i++) {
             for (int j = 0; j < block.getWidth(); j++) {
                 char[][] cells = block.getCells();
-                if (cells[i][j] != '.') {
-                    board[x + i][y + j] = '.';
+                if (cells[i][j] != '%') {
+                    board[x + i][y + j] = '%';
                 }
             }
         }
@@ -105,7 +111,7 @@ public class Board {
     public boolean isFull() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (board[i][j] == '.') {
+                if (board[i][j] == '%') {
                     return false;
                 }
             }

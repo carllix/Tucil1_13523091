@@ -40,20 +40,110 @@ public class IO {
         return this.totalBlock;
     }
 
+    public Board getBoard() {
+        return this.board;
+    }
+
+    private String getNextToken(StringTokenizer tokenizer, String fieldName) throws IOException {
+        if (!tokenizer.hasMoreTokens()) {
+            throw new IOException("Data tidak lengkap: " + fieldName + " tidak ditemukan.");
+        }
+        return tokenizer.nextToken();
+    }
+
     public void readInputFile(String filename) throws IOException {
         String inputFilePath = "test/input/" + filename;
 
         BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
 
         try (br) {
-            StringTokenizer tokenizer = new StringTokenizer(br.readLine());
-            this.rows = Integer.parseInt(tokenizer.nextToken());
-            this.cols = Integer.parseInt(tokenizer.nextToken());
-            this.totalBlock = Integer.parseInt(tokenizer.nextToken());
-            this.type = br.readLine().trim();
+            String firstLine = br.readLine();
+
+            if (firstLine == null || firstLine.trim().isEmpty()) {
+                throw new IOException("File kosong atau format tidak valid.");
+            }
+
+            StringTokenizer tokenizer = new StringTokenizer(firstLine);
+            try {
+                this.rows = Integer.parseInt(getNextToken(tokenizer, "rows"));
+                this.cols = Integer.parseInt(getNextToken(tokenizer, "cols"));
+                this.totalBlock = Integer.parseInt(getNextToken(tokenizer, "totalBlock"));
+            } catch (NumberFormatException e) {
+                throw new IOException("Format angka tidak valid dalam file.");
+            }
+
+            String type = br.readLine();
+            if (type== null || type.trim().isEmpty()) {
+                throw new IOException("Tipe tidak boleh kosong.");
+            }
+            type = type.trim().toUpperCase();
+
+            if (!type.equals("DEFAULT") && !type.equals("CUSTOM")) {
+                throw new IOException("Tipe tidak valid. Harus 'DEFAULT' atau 'CUSTOM'.");
+            }
+            this.type = type;
+
+            this.board = new Board(this.rows, this.cols, this.blocks);
+            if (type.equals("CUSTOM")) {
+                processConfigCustom(br);
+            }
 
             processBlocks(br);
+            br.close();
         }
+    }
+
+    private boolean isValidConfigCustomLine(String line) {
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c != '.' && c != 'X') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private char[][] configCustomStringToMatrix(List<String> lines) throws IOException {
+        int width = lines.get(0).length();
+        for (int i = 1; i < lines.size(); i++) {
+            if (lines.get(i).length() != width) {
+                throw new IOException("Lebar konfigurasi tidak sama.");
+            }
+        }
+
+        char[][] matrix = new char[lines.size()][width];
+        for (int i = 0; i < lines.size(); i++) {
+            for (int j = 0; j < width; j++) {
+                matrix[i][j] = lines.get(i).charAt(j);
+            }
+        }
+        return matrix;
+    }
+
+    private void processConfigCustom(BufferedReader br) throws IOException {
+        List<String> configLines = new ArrayList<>();
+
+        String currentConfigLine;
+        for (int i = 0; i <rows; i++) {
+            currentConfigLine = br.readLine();
+            if (!isValidConfigCustomLine(currentConfigLine)) {
+                throw new IOException("Format konfigurasi tidak valid.");
+            } else {
+                configLines.add(currentConfigLine);
+            }
+        }
+
+        char[][] matrixConfigCustom = configCustomStringToMatrix(configLines);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrixConfigCustom[i][j] == '.') {
+                    board.setBoard(i, j, '.');
+                }
+            }
+        }
+
+        board.printBoard();
     }
 
     private void processBlocks(BufferedReader br) throws IOException {
@@ -80,9 +170,9 @@ public class IO {
         validateBlockCount();
     }
 
-    private void validateBlockCount() {
+    private void validateBlockCount() throws IOException {
         if (blocks.size() != totalBlock) {
-            System.out.println("Jumlah block tidak sesuai, silahkan cek kembali file input!");
+            throw new IOException("Jumlah block tidak sesuai, silahkan cek kembali file input!");
         }
     }
 
@@ -92,7 +182,7 @@ public class IO {
                 return line.charAt(i);
             }
         }
-        return '.';
+        return '%';
     }
 
     private char[][] toCharMatrix(List<String> lines) {
@@ -107,9 +197,9 @@ public class IO {
         for (int i = 0; i < lines.size(); i++) {
             for (int j = 0; j < maxWidth; j++) {
                 if (j < lines.get(i).length()) {
-                    matrix[i][j] = (lines.get(i).charAt(j) == ' ') ? '.' : lines.get(i).charAt(j);
+                    matrix[i][j] = (lines.get(i).charAt(j) == ' ') ? '%' : lines.get(i).charAt(j);
                 } else {
-                    matrix[i][j] = '.';
+                    matrix[i][j] = '%';
                 }
             }
         }
@@ -169,6 +259,8 @@ public class IO {
                     int colorIdx = cell - 'A';
                     String ansiColor = colors[colorIdx];
                     cellColor = convertAnsiToColor(ansiColor);
+                } else if (cell == '.') {
+                    cellColor = Color.BLACK;
                 }
 
                 g2d.setColor(cellColor);
@@ -187,10 +279,10 @@ public class IO {
             dir.mkdirs();
         }
 
-        File outpuutFile = new File(outputDir + filename);
+        File outputFile = new File(outputDir + filename);
 
         try {
-            ImageIO.write(image, "png", outpuutFile);
+            ImageIO.write(image, "png", outputFile);
             System.out.println("Gambar berhasil disimpan di: " + outputDir + filename);
         } catch (IOException e) {
             System.out.println("Gagal menyimpan gambar: " + e.getMessage());
