@@ -5,18 +5,26 @@ import java.util.List;
 
 public class Block {
     private int height, width;
-    private char[][] shape;
+    private char[][] cells;
     private char id;
 
-    public Block(char[][] shape, char id) {
-        this.shape = shape;
+    public Block(char[][] cells, char id) {
+        this.cells = cells;
         this.id = id;
-        this.height = shape.length;
-        this.width = shape[0].length;
+        this.height = cells.length;
+        this.width = cells[0].length;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int getWidth() {
+        return this.width;
     }
     
-    public char[][] getShape() {
-        return this.shape;
+    public char[][] getCells() {
+        return this.cells;
     }
 
     public char getId() {
@@ -24,23 +32,23 @@ public class Block {
     }
 
     private Block rotateCW() {
-        char[][] newShape = new char[width][height];
+        char[][] newCells = new char[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                newShape[i][j] = shape[height - j - 1][i];
+                newCells[i][j] = cells[height - j - 1][i];
             }
         }
-        return new Block(newShape, id);
+        return new Block(newCells, id);
     }
 
     private Block flipHorizontal() {
-        char[][] newShape = new char[height][width];
+        char[][] newCells = new char[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                newShape[i][j] = shape[i][width - j - 1];
+                newCells[i][j] = cells[i][width - j - 1];
             }
         }
-        return new Block(newShape, id);
+        return new Block(newCells, id);
     }
 
     public List<Block> getAllRotationsAndFlips() {
@@ -56,10 +64,10 @@ public class Block {
         return rotationAndFlips;
     }
 
-    public void printShape(char[][] shape) {
+    public void printCells() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                System.out.print(shape[i][j] + " ");
+                System.out.print(cells[i][j] + " ");
             }
             System.out.println();
         }
