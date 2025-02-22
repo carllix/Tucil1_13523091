@@ -7,6 +7,7 @@ public class PuzzleSolver {
     private List<Block> blocks;
     private long totalCaseChecked = 0;
     private long duration = 0;
+    private boolean isSolved = false;
 
     public PuzzleSolver(Board board, List<Block> blocks) {
         this.board = board;
@@ -25,7 +26,11 @@ public class PuzzleSolver {
         return this.board;
     }
 
-    private boolean solve(int idx) {
+    public boolean isSolved() {
+        return this.isSolved;
+    }
+
+    public boolean solve(int idx) {
 
         if(board.isFull()) {
             if (idx < blocks.size()) {
@@ -63,6 +68,8 @@ public class PuzzleSolver {
         long startTime = System.currentTimeMillis();
 
         boolean isSolved = solve(0);
+        this.isSolved = isSolved;
+
         if (!isSolved) {
             System.out.println("Tidak ada solusi yang ditemukan.");
         } else {
