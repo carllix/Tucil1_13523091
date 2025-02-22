@@ -73,7 +73,7 @@ public class IO {
             }
 
             String type = br.readLine();
-            if (type== null || type.trim().isEmpty()) {
+            if (type == null || type.trim().isEmpty()) {
                 throw new IOException("Tipe tidak boleh kosong.");
             }
             type = type.trim().toUpperCase();
@@ -124,7 +124,7 @@ public class IO {
         List<String> configLines = new ArrayList<>();
 
         String currentConfigLine;
-        for (int i = 0; i <rows; i++) {
+        for (int i = 0; i < rows; i++) {
             currentConfigLine = br.readLine();
             if (!isValidConfigCustomLine(currentConfigLine)) {
                 throw new IOException("Format konfigurasi tidak valid.");
@@ -142,8 +142,6 @@ public class IO {
                 }
             }
         }
-
-        board.printBoard();
     }
 
     private void processBlocks(BufferedReader br) throws IOException {
