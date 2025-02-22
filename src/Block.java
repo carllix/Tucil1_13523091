@@ -6,11 +6,9 @@ import java.util.List;
 public class Block {
     private int height, width;
     private char[][] cells;
-    private char id;
 
-    public Block(char[][] cells, char id) {
+    public Block(char[][] cells) {
         this.cells = cells;
-        this.id = id;
         this.height = cells.length;
         this.width = cells[0].length;
     }
@@ -27,10 +25,6 @@ public class Block {
         return this.cells;
     }
 
-    public char getId() {
-        return this.id;
-    }
-
     private Block rotateCW() {
         char[][] newCells = new char[width][height];
         for (int i = 0; i < width; i++) {
@@ -38,7 +32,7 @@ public class Block {
                 newCells[i][j] = cells[height - j - 1][i];
             }
         }
-        return new Block(newCells, id);
+        return new Block(newCells);
     }
 
     private Block flipHorizontal() {
@@ -48,7 +42,7 @@ public class Block {
                 newCells[i][j] = cells[i][width - j - 1];
             }
         }
-        return new Block(newCells, id);
+        return new Block(newCells);
     }
 
     public List<Block> getAllRotationsAndFlips() {
