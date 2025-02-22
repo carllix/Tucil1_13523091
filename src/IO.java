@@ -52,7 +52,9 @@ public class IO {
     }
 
     public void readInputFile(String filename) throws IOException {
-        String inputFilePath = "test/input/" + filename;
+        // String inputFilePath = "test/input/" + filename;
+        this.blocks.clear();
+        String inputFilePath = filename;
 
         BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
 
@@ -89,7 +91,6 @@ public class IO {
             }
 
             processBlocks(br);
-            br.close();
         }
     }
 
@@ -281,13 +282,13 @@ public class IO {
 
         try {
             ImageIO.write(image, "png", outputFile);
-            System.out.println("Gambar berhasil disimpan di: " + outputDir + filename);
+            System.out.println("Gambar berhasil disimpan di: " + outputFile);
         } catch (IOException e) {
             System.out.println("Gagal menyimpan gambar: " + e.getMessage());
         }
     }
 
-    private static Color convertAnsiToColor(String ansiColor) {
+    public static Color convertAnsiToColor(String ansiColor) {
         switch (ansiColor) {
             case "\u001B[31m":
                 return new Color(255, 0, 0);
