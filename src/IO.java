@@ -52,11 +52,9 @@ public class IO {
     }
 
     public void readInputFile(String filename) throws IOException {
-        // String inputFilePath = "test/input/" + filename;
         this.blocks.clear();
-        String inputFilePath = filename;
 
-        BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
+        BufferedReader br = new BufferedReader(new FileReader(filename));
 
         try (br) {
             String firstLine = br.readLine();
@@ -229,7 +227,7 @@ public class IO {
             writer.write("Banyak kasus yang ditinjau: " + totalCaseChecked);
             writer.flush();
 
-            System.out.println("Output berhasil ditulis ke: " + outputDir + filename);
+            System.out.println("Output berhasil disimpan di: " + outputDir + filename);
         } catch (IOException e) {
             System.out.println("Terjadi kesalahan saat menulis file: " + e.getMessage());
         }
