@@ -7,5 +7,5 @@ FGIJJKIH
 LLIJKKIH
 LLIIIIIH
 
-Waktu pencarian: 387 ms
+Waktu pencarian: 368 ms
 Banyak kasus yang ditinjau: 90195
