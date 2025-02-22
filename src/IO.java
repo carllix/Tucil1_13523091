@@ -51,10 +51,10 @@ public class IO {
         return tokenizer.nextToken();
     }
 
-    public void readInputFile(String filename) throws IOException {
+    public void readInputFile(String filePath) throws IOException {
         this.blocks.clear();
 
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
 
         try (br) {
             String firstLine = br.readLine();

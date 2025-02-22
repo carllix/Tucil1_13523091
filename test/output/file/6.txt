@@ -4,5 +4,5 @@ BBBCCCC
 .EEECD.
 ...E...
 
-Waktu pencarian: 7 ms
+Waktu pencarian: 21 ms
 Banyak kasus yang ditinjau: 217

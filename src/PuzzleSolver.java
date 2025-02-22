@@ -71,7 +71,7 @@ public class PuzzleSolver {
         this.isSolved = isSolved;
 
         if (!isSolved) {
-            System.out.println("Tidak ada solusi yang ditemukan.");
+            System.out.println("Solusi tidak ditemukan.");
         } else {
             System.out.println("Solusi ditemukan.");
             board.printBoard();
@@ -79,8 +79,8 @@ public class PuzzleSolver {
         long endTime = System.currentTimeMillis();
         this.duration = endTime - startTime;
 
-        System.out.println("Waktu pencarian: " + (this.duration) + " ms");
-        System.out.println("Banyak kasus yang ditinjau: " + this.totalCaseChecked);
+        System.out.println("\nWaktu pencarian: " + (this.duration) + " ms");
+        System.out.println("\nBanyak kasus yang ditinjau: " + this.totalCaseChecked);
     }
 
     public static void main(String[] args) {
