@@ -52,7 +52,7 @@ javac -d bin src/*.java
 **Using CLI**
 1. Run the following command:
     ```bash
-    java -cp bin src.GUI
+    java -cp bin src.CLI
     ```
 2. Enter the input filename.
 3. If you want to save the output, you can choose to save it as a TXT file, a PNG file, or both.
