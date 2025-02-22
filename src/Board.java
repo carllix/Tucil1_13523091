@@ -10,7 +10,8 @@ public class Board {
             "\u001B[31m", "\u001B[32m", "\u001B[33m", "\u001B[34m", "\u001B[35m", "\u001B[36m",
             "\u001B[91m", "\u001B[92m", "\u001B[93m", "\u001B[94m", "\u001B[95m", "\u001B[96m",
             "\u001B[41m", "\u001B[42m", "\u001B[43m", "\u001B[44m", "\u001B[45m", "\u001B[46m",
-            "\u001B[101m", "\u001B[102m", "\u001B[103m", "\u001B[104m", "\u001B[105m", "\u001B[106m"
+            "\u001B[101m", "\u001B[102m", "\u001B[103m", "\u001B[104m", "\u001B[105m", "\u001B[106m",
+            "\u001B[48;5;208m", "\u001B[48;5;129m"
     };
     private static final String RESET = "\u001B[0m";
 
@@ -49,9 +50,9 @@ public class Board {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 char cell = board[i][j];
-    
+
                 if (cell >= 'A' && cell <= 'Z') {
-                    int colorIdx = cell - 'A'; 
+                    int colorIdx = cell - 'A';
                     System.out.print(COLORS[colorIdx] + cell + RESET + " ");
                 } else {
                     System.out.print(cell + " ");
