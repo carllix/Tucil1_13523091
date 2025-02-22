@@ -1,0 +1,11 @@
+ABBBBBCD
+AEEBBBCC
+FGEEHHHH
+FGIIIIIH
+FGIJJJIH
+FGIJJKIH
+LLIJKKIH
+LLIIIIIH
+
+Waktu pencarian: 387 ms
+Banyak kasus yang ditinjau: 90195
