@@ -18,6 +18,7 @@ public class IO {
     private List<Block> blocks = new ArrayList<>();
     private String type;
     private int rows, cols, totalBlock;
+    private Board board;
 
     public List<Block> getBlocks() {
         return this.blocks;
@@ -43,7 +44,7 @@ public class IO {
         String inputFilePath = "test/input/" + filename;
 
         BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
-        
+
         try (br) {
             StringTokenizer tokenizer = new StringTokenizer(br.readLine());
             this.rows = Integer.parseInt(tokenizer.nextToken());
