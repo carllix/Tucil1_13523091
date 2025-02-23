@@ -30,9 +30,9 @@ public class PuzzleSolver {
         return this.isSolved;
     }
 
-    public boolean solve(int idx) {
+    private boolean solve(int idx) {
 
-        if(board.isFull()) {
+        if (board.isFull()) {
             if (idx < blocks.size()) {
                 return false;
             }
