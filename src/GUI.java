@@ -12,6 +12,7 @@ public class GUI extends JFrame {
     private JButton loadButton, solveButton, savePngButton, saveTxtButton;
     private JPanel boardPanel;
     private JLabel statusLabel;
+    private JLabel fileNameLabel;
     private IO io;
     private PuzzleSolver solver;
     private Board board;
@@ -24,16 +25,23 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        JPanel topPanel = new JPanel();
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
         loadButton = new JButton("Unggah File Puzzle (.txt)");
         solveButton = new JButton("Selesaikan");
         savePngButton = new JButton("Simpan sebagai PNG");
         saveTxtButton = new JButton("Simpan sebagai TXT");
 
-        topPanel.add(loadButton);
-        topPanel.add(solveButton);
-        topPanel.add(savePngButton);
-        topPanel.add(saveTxtButton);
+        buttonPanel.add(loadButton);
+        buttonPanel.add(solveButton);
+        buttonPanel.add(savePngButton);
+        buttonPanel.add(saveTxtButton);
+
+        fileNameLabel = new JLabel("File: -");
+        fileNameLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        
+        topPanel.add(buttonPanel, BorderLayout.CENTER);
+        topPanel.add(fileNameLabel, BorderLayout.SOUTH);
 
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(6, 6));
@@ -54,6 +62,7 @@ public class GUI extends JFrame {
                     File file = fileChooser.getSelectedFile();
 
                     currentInputFileName = file.getName().replaceFirst("[.][^.]+$", "");
+                    fileNameLabel.setText("File: " + file.getName());
 
                     try {
                         board = null;
@@ -79,6 +88,8 @@ public class GUI extends JFrame {
                         JOptionPane.showMessageDialog(null, "File berhasil dimuat.", "Success",
                                 JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
+                        fileNameLabel.setText("File: -");
+                        currentInputFileName = null;
                         JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat memuat file: " + ex.getMessage(),
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -95,7 +106,7 @@ public class GUI extends JFrame {
                     boolean isSolved = solver.isSolved();
         
                     if (!isSolved) {
-                        statusLabel.setText("Waktu pencarian: - | Kasus diuji: -");
+                        statusLabel.setText("Waktu pencarian: " + solver.getDuration() + " ms | Banyak kasus yang ditinjau: " + solver.getTotalCaseChecked());
                         JOptionPane.showMessageDialog(null, "Solusi tidak ditemukan.", "Solution",
                                 JOptionPane.INFORMATION_MESSAGE);
                         return;
