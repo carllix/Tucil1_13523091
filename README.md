@@ -7,11 +7,12 @@
 
 ## Table of Contents
 - [Description](#description)
+- [Program Structure](#program-structure)
 - [Requirements & Installation](#requirements--installation)
 - [Compilation](#compilation)
 - [How to Use](#how-to-use)
 - [Author](#author)
-
+- [References](#references)
 
 ## Description
 This program is an IQ Puzzler Pro Solver that utilizes a brute-force algorithm with backtracking to find solutions efficiently.
@@ -21,6 +22,29 @@ It offers two board configurations:
 2. **CUSTOM** – Allows users to define their own board layout.
 
 The program supports both CLI and GUI modes, providing flexibility for different user preferences. Users can input their puzzle configurations and choose to save the solution as a TXT file or PNG image.
+
+## Program Structure
+```
+├── bin/
+├── doc/
+├── src/
+│   ├── Block.java
+│   ├── Board.java   
+│   ├── IO.java 
+│   ├── PuzzleSolver.java 
+│   ├── CLI.java
+│   └── GUI.java
+├── test/
+│   ├── input/
+│   └── output/
+│       ├── file/
+│       └── image/
+└── README.md         
+```
+- **bin** : contains Java executable .class files compiled from the source code in the src folder.
+- **src** : contains the main program's source code files (.java).
+- **doc** : contains the assignment report and program documentation.
+- **test** : Consists of an input/ folder containing test puzzle files and an output/ folder that stores the solution results in both text and image formats.
 
 ## Requirements & Installation
 1. Install Java Development Kit (JDK) 17 or later
@@ -61,3 +85,7 @@ javac -d bin src/*.java
 Name : Carlo Angkisan <br>  
 NIM : 13523091 <br>  
 Email : carloangkisan21@gmail.com
+
+## References
+- [Spesifikasi Tugas Kecil 1 Stima 2024/2025](https://docs.google.com/document/d/1mVjS4-KAkW5fSEeKMeXJq5lArO8MIAI6a8iZYb2yc0k/edit?tab=t.0)
+- [Slide Kuliah IF2211 2024/2025](https://informatika.stei.itb.ac.id/~rinaldi.munir/Stmik/2024-2025/02-Algoritma-Brute-Force-(2025)-Bag1.pdf)
