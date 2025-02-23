@@ -1,11 +1,8 @@
-ABBBBBCD
-AEEBBBCC
-FGEEHHHH
-FGIIIIIH
-FGIJJJIH
-FGIJJKIH
-LLIJKKIH
-LLIIIIIH
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
 
-Waktu pencarian: 405 ms
-Banyak kasus yang ditinjau: 90195
+Waktu pencarian: 202411 ms
+Banyak kasus yang ditinjau: 125366000

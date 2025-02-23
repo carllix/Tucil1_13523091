@@ -1,10 +1,10 @@
 5 7 5
 CUSTOM
-.......
+...X...
+.XXX
+XXXXXXX
 .XXXXX.
-.XXXXX.
-.XXXXX.
-.......
+...X...
 A
 AAA
 BB

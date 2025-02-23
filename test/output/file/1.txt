@@ -4,5 +4,5 @@ EEBBF
 EEDFF
 EDDFF
 
-Waktu pencarian: 119 ms
+Waktu pencarian: 127 ms
 Banyak kasus yang ditinjau: 27023
